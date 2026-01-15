@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Models\Product;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,16 +13,14 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = CartItem::with('product')
-            ->where('user_id', Auth::id())
-            ->get();
+        $cartItems = CartItem::with('product')->where('user_id', Auth::id())->get();
 
         $subtotal = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
 
         // Assuming 10% tax rate - adjust as needed
-        $taxRate = 0.10;
+        $taxRate = 0.1;
         $tax = $subtotal * $taxRate;
         $total = $subtotal + $tax;
 
@@ -37,18 +36,27 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($productId);
 
-        CartItem::updateOrCreate(
-            ['user_id' => Auth::id(), 'product_id' => $productId],
-            ['quantity' => DB::raw('quantity + 1')]
-        );
+        $cartItem = CartItem::where('user_id', Auth::id())->where('product_id', $productId)->first();
 
+        if ($cartItem) {
+            $cartItem->delete();
+            ToastMagic::info('Produk dihapus dari keranjang: ', $product->name);
+            return back()->with('success', 'Item removed from cart');
+        }
+
+        CartItem::create([
+            'user_id' => Auth::id(),
+            'product_id' => $productId,
+            'quantity' => 1,
+        ]);
+
+        ToastMagic::success('Berhasil menambahkan produk ke keranjang: ', $product->name);
         return back()->with('success', 'Item added to cart!');
     }
 
     public function increase($id)
     {
-        $cartItem = CartItem::where('user_id', Auth::id())
-            ->findOrFail($id);
+        $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
 
         $cartItem->increment('quantity');
 
@@ -57,8 +65,7 @@ class CartController extends Controller
 
     public function decrease($id)
     {
-        $cartItem = CartItem::where('user_id', Auth::id())
-            ->findOrFail($id);
+        $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
 
         if ($cartItem->quantity > 1) {
             $cartItem->decrement('quantity');
@@ -69,8 +76,7 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        $cartItem = CartItem::where('user_id', Auth::id())
-            ->findOrFail($id);
+        $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
 
         $cartItem->delete();
 
@@ -79,23 +85,31 @@ class CartController extends Controller
 
     public function checkout()
     {
-        $cartItems = CartItem::with('product')
-            ->where('user_id', Auth::id())
-            ->get();
+        $cartItems = CartItem::with('product')->where('user_id', Auth::id())->get();
 
         if ($cartItems->isEmpty()) {
             return back()->with('error', 'Your cart is empty!');
         }
 
-        // Here you would typically:
-        // 1. Create an order
-        // 2. Process payment
-        // 3. Clear the cart
-        // 4. Send confirmation
+        try {
+            DB::transaction(function () use ($cartItems) {
+                foreach ($cartItems as $item) {
+                    $product = $item->product;
 
-        // For now, we'll just clear the cart
-        CartItem::where('user_id', Auth::id())->delete();
+                    if ($product->stock < $item->quantity) {
+                        throw new \Exception("Insufficient stock for {$product->name}");
+                    }
 
-        return to_route('main.index')->with('success', 'Order placed successfully!');
+                    $product->decrement('stock', $item->quantity);
+                }
+
+                CartItem::where('user_id', Auth::id())->delete();
+            });
+
+            ToastMagic::success('Checkout berhasil');
+            return to_route('cart.index')->with('success', 'Order placed successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 }
