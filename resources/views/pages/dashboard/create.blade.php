@@ -67,11 +67,11 @@
                             <select name="category" id="category" required
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
                                 <option value="">Select a category</option>
-                                <option value="Wartok" {{ old('category') == 'Wartok' ? 'selected' : '' }}>Wartok ( Warung Toko / Koperasi )</option>
-                                <option value="Warmin" {{ old('category') == 'Warmin' ? 'selected' : '' }}>Warmin ( Warung Minuman ) </option>
-                                <option value="Wargor" {{ old('category') == 'Wargor' ? 'selected' : '' }}>Wargor ( Warung Gorengan ) </option>
-                                <option value="Warnas" {{ old('category') == 'Warnas' ? 'selected' : '' }}>Warnas ( Warung Nasi ) </option>
-                                <option value="Warso" {{ old('category') == 'Warso' ? 'selected' : '' }}>Warso ( Warung Bakso ) </option>
+                                <option value="Makanan" {{ old('category') == 'Wartok' ? 'selected' : '' }}>Makanan</option>
+                                <option value="Minuman" {{ old('category') == 'Warmin' ? 'selected' : '' }}>Minuman</option>
+                                <option value="Sembako" {{ old('category') == 'Wargor' ? 'selected' : '' }}>Sembako</option>
+                                <option value="Elektronik" {{ old('category') == 'Warnas' ? 'selected' : '' }}>Elektronik</option>
+                                <option value="Rokok" {{ old('category') == 'Warso' ? 'selected' : '' }}>Rokok</option>
                             </select>
                             @error('category')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>

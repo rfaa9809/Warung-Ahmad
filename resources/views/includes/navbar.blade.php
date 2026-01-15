@@ -1,4 +1,4 @@
-<nav class="bg-orange-700">
+<nav class="bg-orange-600">
         <div class="max-w-7xl mx-auto px-2 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
@@ -7,7 +7,7 @@
                 <div class="flex gap-3">
                     {{-- Logged Username (Only will show if the user has logged in) --}}
                     @auth
-                        <h1 class="text-white self-center">Hi, {{ Auth::user()->name }}</h1>
+                        <h1 class="text-white self-center">Hi, <span class="font-semibold">{{ Auth::user()->name }}</span></h1>
                     @endauth
 
                     <!-- Search Bar (hidden on mobile) -->
@@ -47,7 +47,7 @@
                         <form method="POST" action="{{ route('auth.logout') }}">
                             @csrf
                             <button
-                                class="text-white hover:text-orange-200 bg-red-800 px-3 py-1 rounded-2xl">Logout</button>
+                                class="text-white hover:text-orange-200 bg-red-700 px-3 py-1 rounded-2xl">Logout</button>
                         </form>
                         @auth
                             @if (auth()->user()->role == 'admin')

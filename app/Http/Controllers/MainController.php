@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     public function welcome(){
-        return view('welcome');
+        // awalnya ini redirect ke page welcome tapi sekarang redirect ke page login aja
+        return view('pages.auth.login');
     }
 
     public function index() {

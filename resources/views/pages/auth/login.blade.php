@@ -5,7 +5,7 @@
 @section('body_style', 'relative')
 
 @section('page_content')
-    <div class="w-full h-[500px] translate-y-[-12rem] bg-orange-700 rounded-full"></div>
+    <div class="w-full h-[500px] translate-y-[-12rem] bg-orange-600 rounded-full"></div>
 
     <div class="absolute inset-0 top-5 flex flex-col items-center justify-center">
         <img src="img/logo/logo_transparent.png" class="brightness-0 invert-[1]">
@@ -14,13 +14,13 @@
             <form method="POST" action="{{ route('auth.login') }}">
                 @csrf
                 <label class="text-orange-800 font-[Poppins]">Email</label><br>
-                <input type="text" name="email" class="border border-orange-700 rounded-2xl w-full py-1 px-3" placeholder="Your Email Here"><br>
+                <input type="text" name="email" class="border border-orange-600 rounded-2xl w-full py-1 px-3" placeholder="Your Email Here"><br>
                 <label class="text-orange-800 font-[Poppins]">Password</label><br>
-                <input type="password" name="password" class="border border-orange-700 rounded-2xl w-full py-1 px-3" placeholder="Your Password Here">
+                <input type="password" name="password" class="border border-orange-600 rounded-2xl w-full py-1 px-3" placeholder="Your Password Here">
 
                 <a href="/" class="block text-xs font-bold font-[Poppins] text-orange-800 mt-3">Forgot Password?</a>
 
-                <input type="submit" class="bg-orange-700 text-white font-semibold text-center w-full mt-3 rounded-full py-2" value="Login">
+                <input type="submit" class="bg-orange-600 text-white font-semibold text-center w-full mt-3 rounded-full py-2" value="Login">
 
                 @if ($errors->any())
                     <ul class="mt-2 px-3 py-1 bg-red-100">
