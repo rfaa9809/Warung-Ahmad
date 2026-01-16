@@ -1,14 +1,14 @@
-<nav class="bg-orange-600">
+<nav class="bg-[#B90B0B]">
         <div class="max-w-7xl mx-auto px-2 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <img src="{{ asset('img/logo/logo_transparent.png') }}" class="h-full brightness-0 invert-[1]">
-
-                <div class="flex gap-3">
+                <img src="{{ asset('img/logo/logowarmad.png') }}" class="h-full">
                     {{-- Logged Username (Only will show if the user has logged in) --}}
                     @auth
-                        <h1 class="text-white self-center">Hi, <span class="font-semibold">{{ Auth::user()->name }}</span></h1>
+                        <h1 class="text-white">Selamat datang Kembali!, <span class="font-semibold">{{ Auth::user()->name }}</span></h1>
                     @endauth
+                <div class="flex gap-3">
+
 
                     <!-- Search Bar (hidden on mobile) -->
                     <div class="hidden md:flex flex-1 justify-center px-4">
@@ -40,14 +40,14 @@
 
                     <!-- Desktop Nav Links -->
                     <div class="hidden md:flex space-x-8 items-center font-[Poppins]">
-                        <a href="{{ route('main.index') }}" class="text-white hover:text-orange-200">Home</a>
-                        <a href="#" class="text-white hover:text-orange-200">Shop</a>
-                        <a href="{{ route('wishlist.index') }}" class="text-white hover:text-orange-200">Wishlist</a>
+                        <a href="{{ route('main.index') }}" class="text-white hover:text-[#FB9935]">Home</a>
+                        <a href="#" class="text-white hover:text-[#FB9935]">Shop</a>
+                        <a href="{{ route('wishlist.index') }}" class="text-white hover:text-[#FB9935]">Wishlist</a>
 
                         <form method="POST" action="{{ route('auth.logout') }}">
                             @csrf
                             <button
-                                class="text-white hover:text-orange-200 bg-red-700 px-3 py-1 rounded-2xl">Logout</button>
+                                class="text-white hover:text-[#FB9935] bg-[#8C0909] px-3 py-1 rounded-2xl">Logout</button>
                         </form>
                         @auth
                             @if (auth()->user()->role == 'admin')
