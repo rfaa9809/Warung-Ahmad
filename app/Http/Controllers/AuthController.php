@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -31,6 +32,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        ToastMagic::success('Berhasil Membuat akun baru.');
+
         return to_route('main.index');
     }
 
@@ -41,24 +44,27 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if(Auth::attempt($validated)){
+        if (Auth::attempt($validated)) {
             $request->session()->regenerate();
-            
+
+            ToastMagic::success('Berhasil login.');
+
             return to_route('main.index');
         }
 
-        throw ValidationException::withMessages(
-            [
-                'credentials' => 'Incorrect Username or Password'
-            ]
-        );
+        throw ValidationException::withMessages([
+            'credentials' => 'Incorrect Username or Password',
+        ]);
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        ToastMagic::success('Berhasil logout.');
 
         return to_route('show.login');
     }
