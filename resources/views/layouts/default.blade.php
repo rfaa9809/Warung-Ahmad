@@ -14,7 +14,7 @@
     
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="@yield('body_style') bg-[#F4F4F4]">
+<body class="@yield('body_style') bg-[#F4F4F4] ">
     @unless (in_array(Route::currentRouteName(), ['main.welcome', 'show.login', 'show.register']))
         @include('includes.navbar')
     @endunless
@@ -25,6 +25,7 @@
 
     @yield('page_scripts')
 
+    @include('includes.footer')
     {!! ToastMagic::scripts() !!}
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 

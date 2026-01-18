@@ -5,33 +5,52 @@
 @section('body_style', 'relative')
 
 @section('page_content')
-   <div class="absolute top-[-14rem] left-1/2 -translate-x-1/2 w-[140%] h-[500px] bg-[#B90B0B] rounded-full"></div>
+  
 
+<div class="relative min-h-screen w-full flex items-center justify-center bg-red-100 p-4">
+    <div class="h-fit w-full max-w-md rounded-3xl shadow-[0_15px_30px_rgba(234,88,12,0.4)] bg-white p-8 flex flex-col gap-4">
+        
+        <div class="flex justify-center mb-2">
+            <img src="{{ asset('img/logo/logowarmad.png') }}" class="h-28 object-contain" alt="Logo">
+        </div>
 
-    <div class="relative z-10 min-h-screen flex flex-col items-center pt-28">
-        <img src="{{ asset('img/logo/logowarmad.png') }}" class="h-30 w-auto">
-        <div class="h-fit w-[85%] lg:w-[60%] rounded-3xl shadow-[0_15px_30px_rgba(234,88,12,0.4)] bg-white p-7 flex flex-col justify-center gap-4">
-            <h1 class="text-center text-[#B90B0B] text-3xl font-[Poppins] font-bold">Login</h1>
-            <form method="POST" action="{{ route('auth.login') }}">
-                @csrf
-                <label class="text-orange-800 font-[Poppins]">Email</label><br>
-                <input type="text" name="email" class="border border-[#FB9935] rounded-2xl w-full py-1 px-3" placeholder="Your Email Here"><br>
-                <label class="text-orange-800 font-[Poppins]">Password</label><br>
-                <input type="password" name="password" class="border border-[#FB9935] rounded-2xl w-full py-1 px-3" placeholder="Your Password Here">
+        <h1 class="text-center text-[#B90B0B] text-2xl font-[Poppins] font-bold">Login</h1>
 
-                <a href="/" class="block text-xs font-bold font-[Poppins] text-orange-800 mt-3">Forgot Password?</a>
+        <form method="POST" action="{{ route('auth.login') }}" class="flex flex-col gap-3">
+            @csrf
+            
+            <div>
+                <label class="text-orange-800 font-[Poppins] text-sm font-semibold">Email</label>
+                <input type="email" name="email" class="border border-[#FB9935] rounded-2xl w-full py-2 px-4 mt-1 focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Your Email Here">
+            </div>
 
-                <input type="submit" class="bg-[#B90B0B] text-white font-semibold text-center w-full mt-3 rounded-full py-2" value="Login">
+            <div>
+                <label class="text-orange-800 font-[Poppins] text-sm font-semibold">Password</label>
+                <input type="password" name="password" class="border border-[#FB9935] rounded-2xl w-full py-2 px-4 mt-1 focus:outline-none focus:ring-2 focus:ring-orange-400" placeholder="Your Password Here">
+                <div class="flex justify-end mt-1">
+                    <a href="#" class="text-xs font-bold text-orange-800 hover:underline">Lupa Password?</a>
+                </div>
+            </div>
 
-                @if ($errors->any())
-                    <ul class="mt-2 px-3 py-1 bg-red-100">
+            <button type="submit" class="bg-[#B90B0B] text-white font-[Poppins] font-semibold text-center w-full mt-4 rounded-full py-2 hover:bg-red-700 transition-colors shadow-md active:scale-95 transition-transform">
+                Login
+            </button>
+
+            @if ($errors->any())
+                <div class="mt-4 p-3 bg-red-100 rounded-xl">
+                    <ul class="list-disc list-inside">
                         @foreach ($errors->all() as $error)
-                            <li class="text-red-500 text-sm">{{ $error }}</li>
+                            <li class="text-red-500 text-xs">{{ $error }}</li>
                         @endforeach
                     </ul>
-                @endif
-            </form>
-        </div>
-        <p class="text-center mx-5 mt-5 text-sm text-orange-800">Belum memiliki akun? <a href="{{ route('show.register') }}" class="font-bold">Daftar</a></p>
+                </div>
+            @endif
+        </form>
+
+        <p class="text-center mt-5 text-sm text-orange-800">
+            Belum Memiliki Akun warung SMK 65? 
+            <a href="{{ route('show.register') }}" class="font-bold">Daftar</a>
+        </p>
     </div>
+</div>
 @endsection
