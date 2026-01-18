@@ -28,6 +28,9 @@ Route::prefix('dashboard')->controller(ProductController::class)->group(function
     Route::get('/index', 'index')->name('products.index');
     Route::get('/create', 'create')->name('products.create');
     Route::post('/store', 'store')->name('products.store');
+    Route::get('/{product}', 'edit')->name('products.edit');
+    Route::put('/update/{product}', 'update')->name('products.update');
+    Route::delete('/{product}', 'destroy')->name('products.destroy');
 });
 
 Route::middleware('auth')->group(function () {
