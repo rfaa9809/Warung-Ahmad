@@ -205,27 +205,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animation config based on screen size
     const animConfig = {
         mobile: {
-            duration: 0.8,
-            stagger: 0.1,
-            distance: 30,
-            scale: 0.9
+            duration: 0.4,
+            stagger: 0.05,
+            distance: 25,
+            scale: 0.93
         },
         tablet: {
-            duration: 1.0,
-            stagger: 0.15,
-            distance: 40,
-            scale: 0.9
+            duration: 0.5,
+            stagger: 0.06,
+            distance: 30,
+            scale: 0.94
         },
         desktop: {
-            duration: 1.5,
-            stagger: 0.2,
-            distance: 60,
+            duration: 0.6,
+            stagger: 0.08,
+            distance: 35,
             scale: 0.95
         },
         fourK: {
-            duration: 2.0,
-            stagger: 0.25,
-            distance: 80,
+            duration: 0.7,
+            stagger: 0.1,
+            distance: 40,
             scale: 0.95
         }
     };
@@ -241,19 +241,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================================
     gsap.from('.banner-content', {
         opacity: 0,
-        y: isMobile ? 30 : 50,
-        duration: config.duration,
-        ease: 'power3.out',
+        y: isMobile ? 20 : 30,
+        duration: 0.5,
+        ease: 'power2.out',
         clearProps: 'all'
     });
 
     if (!isMobile) {
         gsap.from('.banner-image', {
             opacity: 0,
-            scale: config.scale - 0.1,
-            duration: config.duration * 1.2,
-            delay: 0.4,
-            ease: 'back.out(1.4)',
+            scale: 0.92,
+            duration: 0.6,
+            delay: 0.15,
+            ease: 'back.out(1.1)',
             clearProps: 'all'
         });
     }
@@ -270,8 +270,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleActions: 'play none none reverse'
             },
             opacity: 0,
-            x: isMobile ? -30 : -50,
-            duration: config.duration * 0.8,
+            x: isMobile ? -20 : -30,
+            duration: 0.5,
             ease: 'power2.out',
             clearProps: 'all'
         });
@@ -283,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleActions: 'play none none reverse'
             },
             opacity: 0,
-            y: config.distance * 0.7,
-            stagger: config.stagger,
-            duration: config.duration * 0.7,
-            ease: 'power3.out',
+            y: 25,
+            stagger: 0.06,
+            duration: 0.5,
+            ease: 'power2.out',
             clearProps: 'all'
         });
     }
@@ -303,9 +303,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleActions: 'play none none reverse'
             },
             opacity: 0,
-            y: config.distance * 0.7,
-            duration: config.duration * 0.8,
-            ease: 'power3.out',
+            y: 25,
+            duration: 0.5,
+            ease: 'power2.out',
             clearProps: 'all'
         });
 
@@ -316,11 +316,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleActions: 'play none none reverse'
             },
             opacity: 0,
-            scale: config.scale,
-            y: config.distance * 0.5,
-            stagger: config.stagger,
-            duration: config.duration * 0.7,
-            ease: 'back.out(1.4)',
+            scale: 0.94,
+            y: 20,
+            stagger: 0.08,
+            duration: 0.5,
+            ease: 'back.out(1.2)',
             clearProps: 'all'
         });
     }
@@ -337,13 +337,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 scrollTrigger: {
                     trigger: carousel,
                     start: 'top 80%',
-                    end: 'top 50%',
                     toggleActions: 'play none none reverse'
                 },
                 opacity: 0,
-                x: isMobile ? -20 : -40,
-                duration: config.duration,
-                ease: 'power4.out',
+                x: isMobile ? -15 : -25,
+                duration: 0.5,
+                ease: 'power2.out',
                 clearProps: 'all'
             });
         }
@@ -354,22 +353,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 scrollTrigger: {
                     trigger: carousel,
                     start: 'top 75%',
-                    end: 'top 40%',
                     toggleActions: 'play none none reverse'
                 },
                 opacity: 0,
-                y: config.distance,
-                scale: config.scale,
-                stagger: {
-                    each: config.stagger,
-                    ease: 'power2.out'
-                },
-                duration: config.duration,
-                ease: 'power4.out',
+                y: 30,
+                scale: 0.95,
+                stagger: 0.07,
+                duration: 0.5,
+                ease: 'power2.out',
                 clearProps: 'all'
             });
         }
     });
+
 
 });
 </script>
